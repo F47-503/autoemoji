@@ -8,4 +8,10 @@ Pyrogram python library will be used, and Telegram app's credentials are necessa
 
 With file `data.py` you can exctract all messages from groups with at least 1 reaction.
 
-It is assumed that your Telegram app's credentials are in `tg_credentials` file ate first 2 lines.
+It is assumed that your Telegram app's credentials are in `tg_credentials` file at first 2 lines.
+
+`to_csv.py` file will transform data to `pandas.Dataframe` with columns:
+-text, for message's text
+-total, for message's total amount of reactions
+-column for each reaction with ratio `reaction count / total`
+
