@@ -20,7 +20,7 @@ columns are:
 - column for each reaction with ratio `reaction count / total`
 
 
-### 'auto_sentence_transformer.py` 
+### `auto_sentence_transformer.py` 
 exctracts embeddings from data using auto generated sentence transformer from RuBERT.
 
 
