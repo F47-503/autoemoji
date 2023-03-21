@@ -36,14 +36,11 @@ Training in this case takes about 2,5 hours in total.
 
 ### `linear_approach.ipynb` notebook 
 contains linear approach for problem using
-TfidfVectorizer from nltk + LogisticRegression from sklearn.
-LightGBM or XGBoost classifiers can also be used, but accuracy and perfomance will be lower.
+TfidfVectorizer from nltk + LightGBM Classifier.
 2 models are trained :
-- first is reaction predicting itself
-- second is for choosing whether to post reaction or not, default reaction is like, and model determines whether we should post like or not.
-For both models we use Logistic Regression with weighted classes.
-
-`logreg_model_balanced` is binary for main model, and `logreg_model_default` is binary for default-determining model, both models were trained on my dataset.
+- first is reaction predicting itself (`LGBM_model_vectors`)
+- second is for choosing whether to post reaction or not, default reaction is like, and model determines whether we should post like or not. (`LGBM_model_vectors_default`)
+For both models we use LightGBM Classifier with weighted classes. Both models are trained on my dataset.
 
 
 ###  With script `inference.py` you can run the bot
