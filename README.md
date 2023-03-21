@@ -44,3 +44,8 @@ LightGBM or XGBoost classifiers can also be used, but accuracy and perfomance wi
 For both models we use Logistic Regression with weighted classes.
 
 `logreg_model_balanced` is binary for main model, and `logreg_model_default` is binary for default-determining model, both models were trained on my dataset.
+
+
+###  With script `inference.py` you can run the bot
+`tg_credentials` file is necessary again. Script will ask whether you want to use RuBERT or not, 
+then, if message is from chat specified in `group_ids` list, reaction will be sent. 
