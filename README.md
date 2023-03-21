@@ -45,4 +45,4 @@ For both models we use LightGBM Classifier with weighted classes. Both models ar
 
 ###  With script `inference.py` you can run the bot
 `tg_credentials` file is necessary again. Script will ask whether you want to use RuBERT or not, 
-then, if message is from chat specified in `group_ids` list, reaction will be sent. 
+then, if message is from chat specified in `group_ids` list, reaction will be sent. `group_ids` must be stored in file `groups`, group id for every line.
