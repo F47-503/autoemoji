@@ -14,7 +14,7 @@ api_id = int(telegram_data[0])
 api_hash = telegram_data[1][:-1]
 uvloop.install()
 use_rubert = input("Do you want to use rubert? Type 'y' in this case.\n") == 'y'
-group_ids = []
+group_ids = [int(group_id) for group_id in open('groups').readlines()]
 if use_rubert:
   device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
   model = transformers.AutoModel.from_pretrained("DeepPavlov/rubert-base-cased")
