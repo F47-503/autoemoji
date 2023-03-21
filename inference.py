@@ -90,8 +90,7 @@ reaction_list = [
 ]
 app = pyrogram.Client(api_id=api_id, api_hash=api_hash, name="inference")
 @app.on_message()
-def scan_message(client, message):
-  print("message received")
+async def scan_message(client, message):
   if use_rubert:
     inputs = tokenizer(message.text, return_tensors="pt", pad_to_max_length=True, max_length=128, truncation=True).to(device) 
     out = model(**inputs)[0]
@@ -99,11 +98,11 @@ def scan_message(client, message):
     reaction = predictor.predict(out_np) 
     is_default = default_predictor.predict(out_np)
   else:
-    message_vector = vectorizer.transform(message.text)
+    message_vector = vectorizer.transform([message.text])
     reaction = predictor.predict(message_vector) 
     is_default = default_predictor.predict(message_vector)
-  if (reaction != 0 or not is_default) and message.chat.id in group_ids:
-    app.send_reaction(message.chat.id, message.id, reaction_list[reaction][0])
+  if (reaction[0] != 0 or not is_default[0]) and message.chat.id in group_ids:
+    await app.send_reaction(message.chat.id, message.id, reaction_list[reaction[0]])
 app.run()
 
 
