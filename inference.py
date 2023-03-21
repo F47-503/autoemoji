@@ -20,12 +20,12 @@ if use_rubert:
   model = transformers.AutoModel.from_pretrained("DeepPavlov/rubert-base-cased")
   tokenizer = transformers.AutoTokenizer.from_pretrained("DeepPavlov/rubert-base-cased")
   model.to(device)
-  predictor = pickle.load(open('LGBM_model', 'rb'))
-  default_predictor = pickle.load(open('LGBM_model_default', 'rb'))
+  predictor = pickle.load(open('models/LGBM_model', 'rb'))
+  default_predictor = pickle.load(open('models/LGBM_model_default', 'rb'))
 else:
-  vectorizer = pickle.load(open('vectorizer', 'rb'))
-  predictor = pickle.load(open('LGBM_model_vectors', 'rb'))
-  default_predictor = pickle.load(open('LGBM_model_vectors_default', 'rb'))
+  vectorizer = pickle.load(open('models/vectorizer', 'rb'))
+  predictor = pickle.load(open('models/LGBM_model_vectors', 'rb'))
+  default_predictor = pickle.load(open('models/LGBM_model_vectors_default', 'rb'))
 reaction_list = [
     '👍',
     '\U0001fae1',
