@@ -26,7 +26,68 @@ else:
   vectorizer = pickle.load(open('vectorizer', 'rb'))
   predictor = pickle.load(open('LGBM_model_vectors', 'rb'))
   default_predictor = pickle.load(open('LGBM_model_vectors_default', 'rb'))
-reaction_list = []
+reaction_list = [
+    '👍',
+    '\U0001fae1',
+    '🙏',
+    '🔥',
+    '🥰',
+    '👌',
+    '🤓',
+    '🤝',
+    '👎',
+    '🤬',
+    '😁',
+    '🤡',
+    '🏆',
+    '👏',
+    '💯',
+    '❤',
+    '🌚',
+    '🤨',
+    '🥴',
+    '🤩',
+    '😍',
+    '🤣',
+    '😢',
+    '💩',
+    '🤯',
+    '❤\u200d🔥',
+    '🐳',
+    '🤮',
+    '🤗',
+    '😇',
+    '🤔',
+    '🖕',
+    '🥱',
+    '😈',
+    '🕊',
+    '🍌',
+    '🌭',
+    '💋',
+    '⚡',
+    '🍓',
+    '🍾',
+    '💔',
+    '😱',
+    '🎉',
+    '😐',
+    '✍',
+    '😭',
+    '🆒',
+    '🗿',
+    '👀',
+    '💅',
+    '🎄',
+    '☃',
+    '👨\u200d💻',
+    '👻',
+    '🙊',
+    '🤪',
+    '😨',
+    '💊',
+    '😴',
+]
 app = pyrogram.Client(api_id=api_id, api_hash=api_hash, name="inference")
 @app.on_message()
 def scan_message(client, message):
@@ -42,7 +103,7 @@ def scan_message(client, message):
     reaction = predictor.predict(message_vector) 
     is_default = default_predictor.predict(message_vector)
   if (reaction != 0 or not is_default) and message.chat.id in group_ids:
-    app.send_reaction(message.chat.id, message.id, reaction_list[reaction])
+    app.send_reaction(message.chat.id, message.id, reaction_list[reaction][0])
 app.run()
 
 
