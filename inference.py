@@ -7,10 +7,13 @@ import pickle
 import transformers
 import torch
 import warnings
+import numpy as np
+from nltk.stem.porter import *
 warnings.filterwarnings("ignore")
 
 telegram_data = open('tg_credentials').readlines()
 api_id = int(telegram_data[0])
+stemmer = PorterStemmer()
 api_hash = telegram_data[1][:-1]
 uvloop.install()
 use_rubert = input("Do you want to use rubert? Type 'y' in this case.\n") == 'y'
@@ -24,8 +27,8 @@ if use_rubert:
   default_predictor = pickle.load(open('models/LGBM_model_default', 'rb'))
 else:
   vectorizer = pickle.load(open('models/vectorizer', 'rb'))
-  predictor = pickle.load(open('models/LGBM_model_vectors', 'rb'))
-  default_predictor = pickle.load(open('models/LGBM_model_vectors_default', 'rb'))
+  predictor = pickle.load(open('models/XGB_model_vectors', 'rb'))
+  default_predictor = pickle.load(open('models/XGB_model_vectors_default', 'rb'))
 reaction_list = [
     '👍',
     '\U0001fae1',
@@ -98,9 +101,12 @@ async def scan_message(client, message):
     reaction = predictor.predict(out_np) 
     is_default = default_predictor.predict(out_np)
   else:
-    message_vector = vectorizer.transform([message.text])
-    reaction = predictor.predict(message_vector) 
+    text = ' '.join([stemmer.stem(word) for word in message.text.split(' ')])
+    message_vector = vectorizer.transform([text])
+    reaction = np.argmax(predictor.predict(message_vector), axis=1) 
     is_default = default_predictor.predict(message_vector)
+  if message.chat.id not in group_ids:
+    print(message.chat.id)
   if (reaction[0] != 0 or not is_default[0]) and message.chat.id in group_ids:
     await app.send_reaction(message.chat.id, message.id, reaction_list[reaction[0]])
 app.run()
