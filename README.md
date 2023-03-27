@@ -30,7 +30,7 @@ At current stage amount of tokens is limited to 128.
 However, on the set of 8k messages file with binary embeddings is still about 3,3GB.
 `train.ipynb` notebook contains some approaches for model training using embeddings from previous notebook.
 Model training will take a lot of time because of params number. 
-`LGBM_model` and `LGBM_model_default` files contain binaries of trained models for this approach.
+`XGB_model` and `XGB_model_default` files contain binaries of trained models for this approach.
 Training in this case takes about 2,5 hours in total.
 
 

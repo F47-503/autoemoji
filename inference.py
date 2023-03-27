@@ -23,8 +23,8 @@ if use_rubert:
   model = transformers.AutoModel.from_pretrained("DeepPavlov/rubert-base-cased")
   tokenizer = transformers.AutoTokenizer.from_pretrained("DeepPavlov/rubert-base-cased")
   model.to(device)
-  predictor = pickle.load(open('models/LGBM_model', 'rb'))
-  default_predictor = pickle.load(open('models/LGBM_model_default', 'rb'))
+  predictor = pickle.load(open('models/XGB_model', 'rb'))
+  default_predictor = pickle.load(open('models/XGB_model_default', 'rb'))
 else:
   vectorizer = pickle.load(open('models/vectorizer', 'rb'))
   predictor = pickle.load(open('models/XGB_model_vectors', 'rb'))
