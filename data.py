@@ -4,9 +4,9 @@ import uvloop
 import tgcrypto
 import pandas as pd
 import pickle
-f = open('tg_credentials')
-api_id = int(f.read())
-api_hash = f.read()
+api_data = open('tg_credentials').read().split('\n')
+api_id = int(api_data[0])
+api_hash = api_data[1]
 uvloop.install()
 app = pyrogram.Client(api_id=api_id, api_hash=api_hash, name="data")
 messages_reactions = []
