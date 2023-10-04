@@ -20,10 +20,6 @@ columns are:
 - column for each reaction with ratio `reaction count / total`
 
 
-### `auto_sentence_transformer.py` 
-extracts embeddings from data using auto generated sentence transformer from RuBERT.
-
-
 ### `get_embeddings.ipynb` notebook 
 can be used for getting embeddings with RuBERT.
 At current stage amount of tokens is limited to 128.
