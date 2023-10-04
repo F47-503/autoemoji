@@ -5,18 +5,21 @@ import transformers
 import datasets
 import evaluate
 
-data = pd.read_csv("data_all.csv")
-data_emojis = data.drop(["total", "text"], axis=1)
-emojis = data_emojis.columns
-data_np = data_emojis.to_numpy()
-labels = np.argmax(data_np, axis=-1)
+path_to_data = "data_all.csv"
+data = pd.read_csv(path_to_data)
+unique_labels = data['label'].unique()
+emoji2int = {
+    emoji: i for i, emoji in enumerate(unique_labels)
+}
+labels = data['label'].apply(lambda x: emoji2int[x])
+data_emojis = data.drop(["total", "text", "chat_type"], axis=1)
 texts = data["text"]
-model_name = "DeepPavlov/rubert-base-cased"
+model_name = "bert-base-multilingual-cased"
 
 dataset = datasets.Dataset.from_dict({"text": texts, "label": labels})
 
 model = transformers.BertForSequenceClassification.from_pretrained(
-    model_name, num_labels=data_np.shape[1]
+    model_name, num_labels=labels.nunique()
 )
 tokenizer = transformers.BertTokenizer.from_pretrained(model_name)
 
