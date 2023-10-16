@@ -5,7 +5,7 @@ import transformers
 import datasets
 import evaluate
 
-path_to_data = "data_all.csv"
+path_to_data = "data_new.csv"
 data = pd.read_csv(path_to_data)
 unique_labels = data['label'].unique()
 emoji2int = {
